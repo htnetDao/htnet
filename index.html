@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta http-equiv="Content-Language" content="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuralAI Solutions - Intelligenza Artificiale e Reti Neurali Avanzate</title>
+    <meta name="description" content="NeuralAI Solutions: Leader nell'intelligenza artificiale e nelle reti neurali per trasformare il tuo business con soluzioni innovative e predittive.">
+    <meta name="keywords" content="intelligenza artificiale, AI, reti neurali, machine learning, deep learning, soluzioni AI, innovazione tecnologica, dati, predittivo, automazione">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' font-size='80' text-anchor='middle' dominant-baseline='central'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+        :root {
+            --primary-color: #6A1B9A; /* Deep Purple */
+            --secondary-color: #00BCD4; /* Cyan */
+            --accent-color: #FFEB3B; /* Amber */
+            --dark-bg: #1A002C; /* Very Dark Purple */
+            --light-bg: #F3E5F5; /* Light Lavender */
+            --text-light: #E0E0E0; /* Light Grey */
+            --text-dark: #212121; /* Dark Grey */
+            --glass-bg: rgba(26, 0, 44, 0.4); /* Dark Purple with transparency */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.4);
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+        /* Base Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font-body);
+            color: var(--text-light);
+            background-color: var(--dark-bg);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.8em;
+        }
+        h1 { font-size: 3.5em; line-height: 1.2; }
+        h2 { font-size: 2.8em; }
+        h3 { font-size: 2.2em; }
+        h4 { font-size: 1.8em; }
+        p { margin-bottom: 1em; }
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--accent-color);
+        }
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--dark-bg);
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+        }
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-dark);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 12px 28px;
+        }
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-bg);
+            border-color: var(--secondary-color);
+        }
+        section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            transition: background 0.3s ease, padding 0.3s ease;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-family: var(--font-heading);
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-brand span {
+            color: var(--secondary-color);
+        }
+        .navbar-brand img {
+            height: 30px;
+            filter: drop-shadow(0 0 5px rgba(0,255,255,0.5));
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .burger-menu div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-align: center;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        .hero-video-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            background-image: url('https://media.base44.com/images/public/69de61d2769998df788ec38b/3da28f661_generated_image.png'); /* Using one of the provided images as fallback */
+            background-size: cover;
+            background-position: center;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(106, 27, 154, 0.7) 0%, rgba(0, 188, 212, 0.7) 100%);
+            z-index: -1;
+            opacity: 0.9;
+        }
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+            animation: fadeInScale 1s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .hero-content h1 {
+            font-size: 4.5em;
+            margin-bottom: 0.2em;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            color: var(--accent-color);
+        }
+        .hero-content p {
+            font-size: 1.5em;
+            margin-bottom: 2em;
+            font-weight: 300;
+            color: var(--text-light);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        /* Animations */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .animated.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* General Section Styles */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .section-heading h2 {
+            font-size: 3.5em;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .section-heading h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        .section-heading p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        /* Features/Services Grid */
+        .features-grid, .solutions-grid, .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .feature-card, .solution-card, .team-member {
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        .feature-card:hover, .solution-card:hover, .team-member:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: var(--shadow-dark);
+            background: rgba(106, 27, 154, 0.4); /* Slightly darker glass on hover */
+        }
+        .feature-card i, .solution-card i {
+            font-size: 3.5em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+        }
+        .feature-card h3, .solution-card h3 {
+            font-size: 1.8em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        .feature-card p, .solution-card p {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        /* Image sections */
+        .image-content-section {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .image-content-section .content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+        .image-content-section .content h3 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+        }
+        .image-content-section .content p {
+            font-size: 1.1em;
+            color: var(--text-light);
+        }
+        .image-content-section .image-wrapper {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: var(--shadow-dark);
+            transform: rotateY(10deg) rotateX(5deg);
+            transition: transform 0.5s ease-in-out;
+            perspective: 1000px;
+        }
+        .image-content-section .image-wrapper:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+        .image-content-section .image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.6;
+            border-radius: 25px;
+        }
+        .image-content-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            display: block;
+            box-shadow: var(--shadow-light);
+            transform: translateZ(20px); /* 3D effect */
+        }
+        /* About Us Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+            max-width: 700px;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-dark);
+            transform: rotateY(-5deg) rotateX(3deg);
+            transition: transform 0.5s ease;
+        }
+        .about-image:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Team Section */
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--secondary-color);
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .team-member:hover img {
+            transform: scale(1.05);
+        }
+        .team-member h4 {
+            color: var(--accent-color);
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        .team-member p {
+            color: var(--text-light);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .team-member .social-links a {
+            font-size: 1.5em;
+            margin: 0 10px;
+            color: var(--secondary-color);
+        }
+        .team-member .social-links a:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            justify-content: center;
+        }
+        .contact-form-wrapper {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--shadow-dark);
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 1em;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: rgba(0, 188, 212, 0.1);
+        }
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            color: var(--text-light);
+        }
+        .contact-info div {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .contact-info div i {
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-top: 5px;
+        }
+        .contact-info div p {
+            margin: 0;
+        }
+        .contact-info div a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+        .contact-info div a:hover {
+            color: var(--secondary-color);
+        }
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: rgba(26, 0, 44, 0.7);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 50px;
+            opacity: 0; /* Hidden by default */
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .breadcrumb.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .breadcrumb ul {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            color: var(--text-light);
+            font-weight: 300;
+            font-size: 0.9em;
+        }
+        .breadcrumb ul li:not(:last-child)::after {
+            content: '/';
+            margin-left: 10px;
+            color: var(--secondary-color);
+        }
+        .breadcrumb ul li a {
+            color: var(--text-light);
+        }
+        .breadcrumb ul li a:hover {
+            color: var(--secondary-color);
+        }
+        .breadcrumb ul li.active {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        /* Footer */
+        .footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: var(--text-light);
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+        .footer-col p {
+            font-weight: 300;
+        }
+        .footer-social {
+            margin-top: 20px;
+        }
+        .footer-social a {
+            font-size: 1.8em;
+            margin: 0 10px;
+            color: var(--text-light);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .footer-social a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        /* SPA specific styles */
+        .page-section {
+            display: none; /* Hidden by default for SPA */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            padding-top: 120px; /* Offset for sticky header */
+            min-height: calc(100vh - 200px); /* Ensure content pushes footer down */
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #home-page {
+            display: block; /* Home page visible by default */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 2.2em; }
+            h3 { font-size: 1.8em; }
+            .hero-content h1 { font-size: 3.5em; }
+            .hero-content p { font-size: 1.2em; }
+            .section-heading h2 { font-size: 2.8em; }
+            .navbar .container {
+                flex-wrap: wrap;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--glass-bg);
+                border-top: 1px solid var(--border-color);
+                padding: 20px 0;
+                position: absolute;
+                top: 80px; /* Adjust based on navbar height */
+                left: 0;
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+            }
+            .burger-menu {
+                display: flex;
+            }
+            .burger-menu.active .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
+            .burger-menu.active .bar2 { opacity: 0; }
+            .burger-menu.active .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
+            .hero-cta {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .image-content-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .image-content-section .content,
+            .image-content-section .image-wrapper {
+                max-width: 100%;
+            }
+            .image-content-section .content h3 {
+                text-align: center;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .about-text, .about-image {
+                max-width: 100%;
+            }
+            .about-image {
+                transform: none;
+            }
+        }
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+            .hero-content h1 { font-size: 2.8em; }
+            .hero-content p { font-size: 1em; }
+            .section-heading h2 { font-size: 2.2em; }
+            .section-heading p { font-size: 1em; }
+            .features-grid, .solutions-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .contact-content {
+                flex-direction: column;
+            }
+            .contact-form-wrapper, .contact-info {
+                max-width: 100%;
+            }
+            .contact-info div {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            .hero-content h1 { font-size: 2.5em; }
+            .hero-content p { font-size: 0.9em; }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            .navbar-brand {
+                font-size: 1.5em;
+            }
+            .nav-links {
+                top: 70px; /* Adjust for smaller navbar */
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body translate="no" dir="ltr">
+    <header class="navbar">
+        <div class="container">
+            <a href="#home" class="navbar-brand nav-link" data-target="home-page">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300BCD4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'%3E%3C/path%3E%3C/svg%3E" alt="Logo NeuralAI">
+                NeuralAI<span>Solutions</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link" data-target="home-page">Home</a></li>
+                    <li><a href="#servizi" class="nav-link" data-target="servizi-page">Servizi</a></li>
+                    <li><a href="#soluzioni" class="nav-link" data-target="soluzioni-page">Soluzioni</a></li>
+                    <li><a href="#chi-siamo" class="nav-link" data-target="chi-siamo-page">Chi Siamo</a></li>
+                    <li><a href="#contatti" class="nav-link" data-target="contatti-page">Contatti</a></li>
+                </ul>
+            </nav>
+            <div class="burger-menu">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+        </div>
+    </header>
+    <main id="app-content">
+        <!-- Home Page -->
+        <section id="home-page" class="page-section active">
+            <div class="hero">
+                <video autoplay muted loop playsinline class="hero-video-bg"
+                       src="https://media.base44.com/videos/private/69de61d2769998df788ec38b/56f939851_video-1778717368007.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOjU4OGQ5ZTIzMjViYTQ5Mzk4ZDg0ZjhjNzM0ZGM3NzlhOSIsInN1YiI6InVybjphcHA6NThkOWUyMzI1YmE0OTM5OGQ4NGY4YzczNGRjNzlhOSIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTc3ODcxNzM2MCwiZXhwIjoxNzc4NzIwOTYwLCJqdGkiOiJmNjM2ZjQ0Zi1lNjBiLTQzNjUtYjE2Yi03NDc3ZGM0ZjUzMjYiLCJvYmoiOltbeyJwYXRoIjoiL3ByaXZhdGUvNjlkZTYxZDI3Njk5OThkZjc4OGVjMzhiLzU2ZjkzOTg1MV92aWRlby0xNzc4NzE3MzY4MDA3LmmpNCJ9XV19.BujcjeP-myYz-BgEnWJq6GYlB_yHbO7vm-JcXbInxyE"
+                       poster="https://media.base44.com/images/public/69de61d2769998df788ec38b/3da28f661_generated_image.png">
+                    Il tuo browser non supporta il tag video.
+                </video>
+                <div class="hero-content">
+                    <h1>Sblocca il Potenziale Illimitato dell'AI</h1>
+                    <p>Trasformiamo le sfide complesse in opportunità innovative con l'intelligenza artificiale e le reti neurali all'avanguardia.</p>
+                    <div class="hero-cta">
+                        <a href="#servizi" class="btn nav-link" data-target="servizi-page">Scopri i Nostri Servizi</a>
+                        <a href="#contatti" class="btn btn-outline nav-link" data-target="contatti-page">Parla con un Esperto</a>
+                    </div>
+                </div>
+            </div>
+            <section id="home-intro" class="animated">
+                <div class="container text-center">
+                    <div class="section-heading">
+                        <h2>Il Futuro è Intelligente</h2>
+                        <p>In NeuralAI Solutions, siamo pionieri nell'applicazione di soluzioni di intelligenza artificiale e deep learning per aiutare le aziende a navigare l'era digitale con successo. Dalla predizione avanzata all'automazione intelligente, siamo il tuo partner per l'innovazione.</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card animated">
+                            <i class="fas fa-brain"></i>
+                            <h3>Reti Neurali Avanzate</h3>
+                            <p>Sviluppiamo modelli di deep learning personalizzati per riconoscimento di pattern, analisi predittiva e decisioni autonome.</p>
+                        </div>
+                        <div class="feature-card animated">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Analisi Predittiva</h3>
+                            <p>Trasforma i tuoi dati in insight azionabili con algoritmi AI che prevedono tendenze future e comportamenti del mercato.</p>
+                        </div>
+                        <div class="feature-card animated">
+                            <i class="fas fa-robot"></i>
+                            <h3>Automazione Intelligente</h3>
+                            <p>Ottimizza i processi aziendali con soluzioni di automazione basate su AI, riducendo costi e migliorando l'efficienza.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="home-innovation" class="animated">
+                <div class="container image-content-section">
+                    <div class="content text-left animated">
+                        <h3>Innovazione al Tuo Servizio</h3>
+                        <p>La nostra missione è democratizzare l'accesso all'intelligenza artificiale, rendendola uno strumento potente e accessibile per aziende di ogni dimensione. Con un team di esperti in AI, data science e ingegneria del software, costruiamo soluzioni che non solo risolvono problemi attuali, ma aprono nuove vie per la crescita futura.</p>
+                        <p>Crediamo che l'AI sia la chiave per un mondo più efficiente, produttivo e innovativo. Lascia che ti guidiamo in questo viaggio.</p>
+                        <a href="#chi-siamo" class="btn mt-4 nav-link" data-target="chi-siamo-page">Scopri di Più su di Noi</a>
+                    </div>
+                    <div class="image-wrapper animated">
+                        <img src="https://media.base44.com/images/public/69de61d2769998df788ec38b/9a4b577b5_generated_image.png" alt="Innovazione AI">
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!-- Servizi Page -->
+        <section id="servizi-page" class="page-section">
+            <div class="breadcrumb">
+                <div class="container">
+                    <ul>
+                        <li><a href="#home" class="nav-link" data-target="home-page">Home</a></li>
+                        <li class="active">Servizi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <div class="section-heading">
+                    <h2>I Nostri Servizi AI di Punta</h2>
+                    <p>Offriamo una gamma completa di servizi basati sull'intelligenza artificiale e le reti neurali, progettati per dare alla tua azienda un vantaggio competitivo.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card animated">
+                        <i class="fas fa-cube"></i>
+                        <h3>Sviluppo di Modelli Custom</h3>
+                        <p>Creazione di modelli AI e reti neurali deep learning su misura per le tue esigenze specifiche, dall'elaborazione del linguaggio naturale alla visione artificiale.</p>
+                    </div>
+                    <div class="feature-card animated">
+                        <i class="fas fa-database"></i>
+                        <h3>Analisi e Gestione Dati</h3>
+                        <p>Servizi di pulizia, preparazione e analisi di big data per alimentare i tuoi modelli AI e estrarre insight preziosi.</p>
+                    </div>
+                    <div class="feature-card animated">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Integrazione Sistemi AI</h3>
+                        <p>Integrazione fluida delle soluzioni AI nei tuoi sistemi e flussi di lavoro esistenti, garantendo una transizione senza intoppi.</p>
+                    </div>
+                    <div class="feature-card animated">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Consulenza Strategica AI</h3>
+                        <p>Guida esperta per definire la tua strategia AI, identificare opportunità e massimizzare il ritorno sull'investimento.</p>
+                    </div>
+                    <div class="feature-card animated">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Sicurezza AI e Etica</h3>
+                        <p>Implementazione di pratiche di sicurezza avanzate e garanzia di conformità etica nello sviluppo e nell'uso dell'AI.</p>
+                    </div>
+                    <div class="feature-card animated">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Formazione e Supporto</h3>
+                        <p>Programmi di formazione personalizzati per il tuo team e supporto continuo per garantire il successo a lungo termine delle tue soluzioni AI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Soluzioni Page -->
+        <section id="soluzioni-page" class="page-section">
+            <div class="breadcrumb">
+                <div class="container">
+                    <ul>
+                        <li><a href="#home" class="nav-link" data-target="home-page">Home</a></li>
+                        <li class="active">Soluzioni</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Soluzioni AI per Settori Specifici</h2>
+                    <p>Le nostre soluzioni AI sono progettate per affrontare le sfide uniche di diversi settori, offrendo risultati tangibili e innovazione.</p>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card animated">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>Sanità Intelligente</h3>
+                        <p>Diagnosi assistita da AI, scoperta di farmaci, gestione ottimizzata dei pazienti e ricerca clinica avanzata.</p>
+                        <a href="#" class="btn btn-outline mt-4">Scopri di più</a>
+                    </div>
+                    <div class="solution-card animated">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Finanza Predittiva</h3>
+                        <p>Rilevamento frodi, trading algoritmico, valutazione del rischio di credito e personalizzazione dei servizi finanziari.</p>
+                        <a href="#" class="btn btn-outline mt-4">Scopri di più</a>
+                    </div>
+                    <div class="solution-card animated">
+                        <i class="fas fa-industry"></i>
+                        <h3>Manifattura 4.0</h3>
+                        <p>Manutenzione predittiva, controllo qualità automatizzato, ottimizzazione della catena di approvvigionamento e robotica avanzata.</p>
+                        <a href="#" class="btn btn-outline mt-4">Scopri di più</a>
+                    </div>
+                    <div class="solution-card animated">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Retail e E-commerce</h3>
+                        <p>Raccomandazioni personalizzate, previsione della domanda, ottimizzazione dei prezzi e analisi del comportamento del cliente.</p>
+                        <a href="#" class="btn btn-outline mt-4">Scopri di più</a>
+                    </div>
+                </div>
+                <section id="soluzioni-case-study" class="animated mt-5">
+                    <div class="image-content-section reverse">
+                        <div class="image-wrapper animated">
+                            <img src="https://media.base44.com/images/public/69de61d2769998df788ec38b/b1694b040_generated_image.png" alt="Case Study AI">
+                        </div>
+                        <div class="content text-right animated">
+                            <h3>Case Study: Ottimizzazione Logistica</h3>
+                            <p>Abbiamo collaborato con "Logistica Veloce S.p.A." per implementare un sistema di routing predittivo basato su AI. Analizzando dati storici sul traffico, condizioni meteorologiche e ordini, il sistema ha ridotto i tempi di consegna del 15% e i costi del carburante del 10% in soli sei mesi.</p>
+                            <p>Questo è solo un esempio di come le nostre soluzioni AI possano generare un impatto reale e misurabile sul tuo business.</p>
+                            <a href="#contatti" class="btn mt-4 nav-link" data-target="contatti-page">Inizia la Tua Trasformazione</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+        <!-- Chi Siamo Page -->
+        <section id="chi-siamo-page" class="page-section">
+            <div class="breadcrumb">
+                <div class="container">
+                    <ul>
+                        <li><a href="#home" class="nav-link" data-target="home-page">Home</a></li>
+                        <li class="active">Chi Siamo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <div class="section-heading">
+                    <h2>La Storia di NeuralAI Solutions</h2>
+                    <p>Siamo un team di innovatori, scienziati e ingegneri uniti dalla passione per l'intelligenza artificiale e il suo potenziale di trasformazione.</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text animated">
+                        <h3>La Nostra Missione</h3>
+                        <p>Fondata nel 2020 da un gruppo di ricercatori visionari, NeuralAI Solutions è nata con l'obiettivo di rendere l'intelligenza artificiale accessibile e vantaggiosa per ogni tipo di organizzazione. Dal primo giorno, ci siamo dedicati alla ricerca e allo sviluppo di soluzioni AI etiche, robuste e scalabili.</p>
+                        <p>Crediamo fermamente che l'AI non sia solo una tecnologia, ma un catalizzatore per il progresso umano e aziendale. Il nostro approccio è collaborativo: lavoriamo a stretto contatto con i nostri clienti per capire le loro esigenze uniche e costruire soluzioni che generino un impatto duraturo.</p>
+                        <p>La nostra cultura è incentrata sull'innovazione continua, la trasparenza e l'eccellenza. Ci impegniamo a rimanere all'avanguardia della ricerca AI, integrando le ultime scoperte nei nostri prodotti e servizi.</p>
+                    </div>
+                    <div class="about-image animated">
+                        <img src="https://media.base44.com/images/public/69de61d2769998df788ec38b/3da28f661_generated_image.png" alt="Il nostro team al lavoro">
+                    </div>
+                </div>
+                <div class="section-heading mt-5">
+                    <h2>Il Nostro Team di Esperti</h2>
+                    <p>Incontra le menti brillanti che guidano l'innovazione in NeuralAI Solutions.</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member animated">
+                        <img src="https://via.placeholder.com/150/6A1B9A/FFFFFF?text=A.R." alt="Avatar Andrea Rossi">
+                        <h4>Andrea Rossi</h4>
+                        <p>CEO & Fondatore</p>
+                        <p>Visionario dell'AI con oltre 15 anni di esperienza nello sviluppo di algoritmi complessi.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member animated">
+                        <img src="https://via.placeholder.com/150/00BCD4/FFFFFF?text=L.B." alt="Avatar Laura Bianchi">
+                        <h4>Laura Bianchi</h4>
+                        <p>Chief AI Scientist</p>
+                        <p>Esperta di deep learning e reti neurali, guida la ricerca e lo sviluppo dei nostri modelli.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member animated">
+                        <img src="https://via.placeholder.com/150/FFEB3B/212121?text=M.V." alt="Avatar Marco Verdi">
+                        <h4>Marco Verdi</h4>
+                        <p>Head of Solutions</p>
+                        <p>Specializzato nell'integrazione di soluzioni AI in ambienti aziendali complessi.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contatti Page -->
+        <section id="contatti-page" class="page-section">
+            <div class="breadcrumb">
+                <div class="container">
+                    <ul>
+                        <li><a href="#home" class="nav-link" data-target="home-page">Home</a></li>
+                        <li class="active">Contatti</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Contattaci</h2>
+                    <p>Siamo pronti ad ascoltare le tue sfide e trasformarle in opportunità con l'intelligenza artificiale.</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-form-wrapper animated">
+                        <h3>Inviaci un Messaggio</h3>
+                        <form class="contact-form">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
+                            <label for="email">Email Aziendale</label>
+                            <input type="email" id="email" name="email" placeholder="la_tua_email@esempio.com" required>
+                            <label for="subject">Oggetto</label>
+                            <input type="text" id="subject" name="subject" placeholder="Es. Richiesta di consulenza AI" required>
+                            <label for="message">Il tuo Messaggio</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Descrivi brevemente le tue esigenze" required></textarea>
+                            <button type="submit" class="btn">Invia Messaggio</button>
+                        </form>
+                    </div>
+                    <div class="contact-info animated">
+                        <h3>Informazioni di Contatto</h3>
+                        <div>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Via dell'Innovazione 23, 20100 Milano, Italia</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-phone"></i>
+                            <p><a href="tel:+390212345678">+39 02 1234 5678</a></p>
+                        </div>
+                        <div>
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:info@neuralaisolutions.com">info@neuralaisolutions.com</a></p>
+                        </div>
+                        <div>
+                            <i class="fas fa-clock"></i>
+                            <p>Lun-Ven: 9:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>NeuralAI Solutions</h4>
+                    <p>Siamo pionieri nell'Intelligenza Artificiale, trasformando dati complessi in soluzioni intuitive per il tuo business.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Link Utili</h4>
+                    <ul>
+                        <li><a href="#servizi" class="nav-link" data-target="servizi-page">I Nostri Servizi</a></li>
+                        <li><a href="#soluzioni" class="nav-link" data-target="soluzioni-page">Le Nostre Soluzioni</a></li>
+                        <li><a href="#chi-siamo" class="nav-link" data-target="chi-siamo-page">Chi Siamo</a></li>
+                        <li><a href="#contatti" class="nav-link" data-target="contatti-page">Contattaci</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Risorse</h4>
+                    <ul>
+                        <li><a href="#">Carriere</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Termini di Servizio</a></li>
+                        <li><a href="#">Informativa sulla Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Sede Centrale</h4>
+                    <p>NeuralAI Solutions S.r.l.</p>
+                    <p>Via dell'Innovazione 23</p>
+                    <p>20100 Milano, Italia</p>
+                    <p>P.IVA: IT01234567890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeuralAI Solutions. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const appContent = document.getElementById('app-content');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const burgerMenu = document.querySelector('.burger-menu');
+            const navMenu = document.querySelector('.nav-links');
+            const breadcrumb = document.querySelector('.breadcrumb');
+            // Function to show a specific page
+            const showPage = (pageId, pushState = true) => {
+                const currentPage = document.querySelector('.page-section.active');
+                const newPage = document.getElementById(pageId);
+                if (currentPage) {
+                    currentPage.classList.remove('active');
+                    currentPage.style.opacity = '0';
+                    currentPage.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        currentPage.style.display = 'none';
+                    }, 600); // Wait for transition to finish
+                }
+                if (newPage) {
+                    newPage.style.display = 'block';
+                    setTimeout(() => {
+                        newPage.classList.add('active');
+                        newPage.style.opacity = '1';
+                        newPage.style.transform = 'translateY(0)';
+                    }, 10); // Small delay to ensure display:block takes effect before transition
+                }
+                // Update active class in navbar
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.target === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                // Close mobile menu if open
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    burgerMenu.classList.remove('active');
+                }
+                // Update breadcrumb
+                updateBreadcrumb(pageId);
+                // Update URL hash
+                if (pushState) {
+                    window.history.pushState({ page: pageId }, '', `#${pageId.replace('-page', '')}`);
+                }
+            };
+            // Update breadcrumb visibility and content
+            const updateBreadcrumb = (pageId) => {
+                const breadcrumbList = breadcrumb.querySelector('ul');
+                breadcrumbList.innerHTML = ''; // Clear existing breadcrumb
+                if (pageId === 'home-page') {
+                    breadcrumb.classList.remove('visible');
+                    return;
+                }
+                breadcrumb.classList.add('visible');
+                const homeLink = document.createElement('li');
+                homeLink.innerHTML = `<a href="#home" class="nav-link" data-target="home-page">Home</a>`;
+                breadcrumbList.appendChild(homeLink);
+                const currentPageName = pageId.replace('-page', '');
+                const currentPageLink = document.createElement('li');
+                currentPageLink.classList.add('active');
+                currentPageLink.textContent = currentPageName.charAt(0).toUpperCase() + currentPageName.slice(1);
+                breadcrumbList.appendChild(currentPageLink);
+            };
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPageId = link.dataset.target;
+                    showPage(targetPageId);
+                });
+            });
+            // Handle burger menu click
+            burgerMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                burgerMenu.classList.toggle('active');
+            });
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', (event) => {
+                const hash = window.location.hash.substring(1);
+                const pageId = hash ? `${hash}-page` : 'home-page';
+                showPage(pageId, false); // Don't push state again
+            });
+            // Initial page load
+            const initialHash = window.location.hash.substring(1);
+            const initialPageId = initialHash ? `${initialHash}-page` : 'home-page';
+            showPage(initialPageId, false); // Don't push state on initial load
+            // Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.animated').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
